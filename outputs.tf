@@ -1,7 +1,7 @@
-output "eip_www" {
-  value = aws_eip.eip_www[*].public_ip
+output "eip" {
+  value = aws_eip.pscloud-eip[*].public_ip
 }
 
-output "ec2_ip_www" {
+output "ip" {
   value = aws_instance.pscloud-ec2[*].public_ip
 }

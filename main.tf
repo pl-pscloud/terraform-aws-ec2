@@ -40,8 +40,8 @@ resource "aws_instance" "pscloud-ec2" {
   }
 }
 
-resource "aws_eip" "eip_www" {
-  count = (var.pscloud_eip_true == "true" ? length(aws_instance.pscloud-ec2) : 0)
+resource "aws_eip" "pscloud-eip" {
+  count = (var.pscloud_eip_true == true ? length(aws_instance.pscloud-ec2) : 0)
 
   vpc = true
   instance                  = aws_instance.pscloud-ec2[count.index].id
@@ -56,7 +56,7 @@ data  "template_file" "ec2tpl" {
   template = file("../ansible/templates/inventory.tpl")
   vars = {
       ec2name = var.pscloud_purpose
-      ec2ip = (var.pscloud_eip_true == "true" ? (join("\n", aws_eip.eip_www.*.public_ip)) : (join("\n", aws_instance.pscloud-ec2.*.public_ip)))
+      ec2ip = (var.pscloud_eip_true == "true" ? (join("\n", aws_eip.pscloud-eip.*.public_ip)) : (join("\n", aws_instance.pscloud-ec2.*.public_ip)))
   }
 }
 
