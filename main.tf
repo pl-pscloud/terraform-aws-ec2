@@ -63,6 +63,11 @@ data  "template_file" "ec2tpl" {
 resource "local_file" "ec2tpl_file" {
   content  = data.template_file.ec2tpl.rendered
   filename = "../ansible/inventory/ec2-host-${var.pscloud_env}-${var.pscloud_purpose}"
+
+  depends_on = [
+    aws_eip.pscloud-eip, aws_instance.pscloud-ec2,
+  ]
+
 }
 
 
