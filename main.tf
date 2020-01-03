@@ -69,19 +69,3 @@ resource "local_file" "ec2tpl_file" {
   ]
 
 }
-
-
-
-
-
-
-
-
-/*
-resource "aws_lb_target_group_attachment" "tf_lb_target_gr_attachment" {
-  count = (var.env == "prod" ? var.instance_count : 0)
-  target_group_arn = var.elb_target_group[0].arn
-  target_id        = aws_instance.tf_ec2_web_1[count.index].id
-  port             = 80
-}
-*/
