@@ -17,8 +17,8 @@ resource "aws_instance" "pscloud-ec2" {
   }
 
   tags = {
-    Name = "${var.pscloud_company}_ec2_webserver_${var.pscloud_env}"
-    Purpose = "${var.pscloud_company}_ec2_webserver_${var.pscloud_env}_${var.pscloud_purpose}"
+    Name = "${var.pscloud_company}_ec2_${var.pscloud_env}"
+    Purpose = "${var.pscloud_company}_ec2_${var.pscloud_env}_${var.pscloud_purpose}"
   }
 
   provisioner "remote-exec" {
