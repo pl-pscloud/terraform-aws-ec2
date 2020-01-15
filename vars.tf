@@ -10,7 +10,8 @@ variable "pscloud_sec_gr" {}
 variable "pscloud_eip_true" { default = false}
 variable "pscloud_remote_exec_key" {}
 variable "pscloud_monitoring" { default = false}
-
+variable "pscloud_root_volume_size" { default = 10 }
+variable "pscloud_root_volume_type" { default = "gp2" }
 
 
 //variable "pscloud_elb_target_group" {}

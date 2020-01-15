@@ -11,8 +11,8 @@ resource "aws_instance" "pscloud-ec2" {
   ]
 
   root_block_device {
-    volume_type = "gp2"
-    volume_size = 10
+    volume_type = var.pscloud_root_volume_type
+    volume_size = var.pscloud_root_volume_size
     delete_on_termination = true
   }
 
