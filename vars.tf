@@ -7,8 +7,9 @@ variable "pscloud_instance_type" {}
 variable "pscloud_instance_ami" {}
 variable "pscloud_public_subnets_id" {}
 variable "pscloud_sec_gr" {}
-variable "pscloud_eip_true" {}
+variable "pscloud_eip_true" { default = false}
 variable "pscloud_remote_exec_key" {}
+variable "pscloud_monitoring" { default = false}
 
 
 

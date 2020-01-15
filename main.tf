@@ -16,6 +16,8 @@ resource "aws_instance" "pscloud-ec2" {
     delete_on_termination = true
   }
 
+  monitoring = var.pscloud_monitoring
+
   tags = {
     Name = "${var.pscloud_company}_ec2_${var.pscloud_env}"
     Purpose = "${var.pscloud_company}_ec2_${var.pscloud_env}_${var.pscloud_purpose}"
