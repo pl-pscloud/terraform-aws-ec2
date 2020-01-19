@@ -10,6 +10,8 @@ resource "aws_instance" "pscloud-ec2" {
     var.pscloud_sec_gr
   ]
 
+  private_ip = var.pscloud_private_ip
+
   root_block_device {
     volume_type = var.pscloud_root_volume_type
     volume_size = var.pscloud_root_volume_size
