@@ -5,7 +5,7 @@ variable "pscloud_purpose" {}
 variable "pscloud_instance_count" {}
 variable "pscloud_instance_type" {}
 variable "pscloud_instance_ami" {}
-variable "pscloud_public_subnets_id" {}
+variable "pscloud_subnet_id" {}
 variable "pscloud_sec_gr" {}
 variable "pscloud_eip_true" { default = false}
 variable "pscloud_private_ip" { default = "" }
