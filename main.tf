@@ -6,9 +6,7 @@ resource "aws_instance" "pscloud-ec2" {
   instance_type = var.pscloud_instance_type
 
   subnet_id = var.pscloud_subnet_id
-  vpc_security_group_ids = [
-    var.pscloud_sec_gr
-  ]
+  vpc_security_group_ids = var.pscloud_sec_gr
 
   private_ip = var.pscloud_private_ip
 
