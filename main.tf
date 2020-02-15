@@ -23,15 +23,20 @@ resource "aws_instance" "pscloud-ec2" {
     Purpose = "${var.pscloud_company}_ec2_${var.pscloud_env}_${var.pscloud_purpose}"
   }
 
+}
+
+resource "null_resource" "pscloud-provisioner-ssh" {
+  count                     = (var.pscloud_provisioner_ssh == true) ? 1 : 0
+
   provisioner "remote-exec" {
     inline = [
-    "echo 'EC2 runing'",
+      "echo 'EC2 runing'",
     ]
   }
 
   connection {
     type = "ssh"
-    host = self.public_ip
+    host = aws_instance.pscloud-ec2.public_ip
     user  = "ubuntu"
     private_key = file(var.pscloud_remote_exec_key)
     agent = false
