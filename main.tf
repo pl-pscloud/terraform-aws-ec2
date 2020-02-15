@@ -45,6 +45,8 @@ resource "null_resource" "pscloud-provisioner-ssh" {
   provisioner "local-exec" {
     command = "echo 'EC2 runing'"
   }
+
+  depends_on = [ aws_instance.pscloud-ec2 ]
 }
 
 resource "aws_eip" "pscloud-eip" {
