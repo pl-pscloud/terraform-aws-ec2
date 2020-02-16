@@ -13,6 +13,8 @@ resource "aws_instance" "pscloud-ec2" {
   root_block_device {
     volume_type = var.pscloud_root_volume_type
     volume_size = var.pscloud_root_volume_size
+    encrypted = var.pscloud_root_volume_encrypted
+    kms_key_id = var.pscloud_kms_key_id
     delete_on_termination = true
   }
 
@@ -20,7 +22,7 @@ resource "aws_instance" "pscloud-ec2" {
 
   tags = {
     Name = "${var.pscloud_company}_ec2_${var.pscloud_env}"
-    Purpose = "${var.pscloud_company}_ec2_${var.pscloud_env}_${var.pscloud_purpose}"
+    Project = var.pscloud_project
   }
 
 }
@@ -36,7 +38,7 @@ resource "null_resource" "pscloud-provisioner-ssh" {
 
   connection {
     type = "ssh"
-    host = aws_instance.pscloud-ec2.public_ip
+    host = aws_instance.pscloud-ec2[0].public_ip
     user  = "ubuntu"
     private_key = file(var.pscloud_remote_exec_key)
     agent = false
@@ -64,14 +66,14 @@ resource "aws_eip" "pscloud-eip" {
 data  "template_file" "ec2tpl" {
   template = file("../ansible/templates/inventory.tpl")
   vars = {
-      ec2name = var.pscloud_purpose
+      ec2name = var.pscloud_project
       ec2ip = (var.pscloud_eip_true == true ? (join("\n", aws_eip.pscloud-eip.*.public_ip)) : (join("\n", aws_instance.pscloud-ec2.*.public_ip)))
   }
 }
 
 resource "local_file" "ec2tpl_file" {
   content  = data.template_file.ec2tpl.rendered
-  filename = "../ansible/inventory/ec2-host-${var.pscloud_env}-${var.pscloud_purpose}"
+  filename = "../ansible/inventory/ec2-host-${var.pscloud_env}-${var.pscloud_project}"
 
   depends_on = [
     aws_eip.pscloud-eip, aws_instance.pscloud-ec2,
