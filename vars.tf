@@ -18,7 +18,6 @@ variable "pscloud_kms_key_id" { default = ""}
 
 variable "pscloud_provisioner_ssh" { default = false}
 
-
 //variable "pscloud_elb_target_group" {}
 //variable "pscloud_instance_spot_price" {}
 
