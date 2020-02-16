@@ -13,6 +13,7 @@ resource "aws_instance" "pscloud-ec2" {
   root_block_device {
     volume_type = var.pscloud_root_volume_type
     volume_size = var.pscloud_root_volume_size
+    encrypted = var.pscloud_root_volume_encrypted
     delete_on_termination = true
   }
 
@@ -36,7 +37,7 @@ resource "null_resource" "pscloud-provisioner-ssh" {
 
   connection {
     type = "ssh"
-    host = aws_instance.pscloud-ec2.public_ip
+    host = aws_instance.pscloud-ec2[0].public_ip
     user  = "ubuntu"
     private_key = file(var.pscloud_remote_exec_key)
     agent = false
