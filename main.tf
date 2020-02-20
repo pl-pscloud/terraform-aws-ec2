@@ -21,7 +21,12 @@ resource "aws_instance" "pscloud-ec2" {
   monitoring = var.pscloud_monitoring
 
   tags = {
-    Name    = "${var.pscloud_company}_ec2_${var.pscloud_env}"
+    Name    = "${var.pscloud_company}_ec2_${var.pscloud_env}_${var.pscloud_project}"
+    Project = var.pscloud_project
+  }
+
+  volume_tags = {
+    Name    = "${var.pscloud_company}_ebs_${var.pscloud_env}_${var.pscloud_project}"
     Project = var.pscloud_project
   }
 
@@ -59,7 +64,7 @@ resource "aws_eip" "pscloud-eip" {
   associate_with_private_ip = aws_instance.pscloud-ec2[count.index].private_ip
 
   tags = {
-    Name = "${var.pscloud_company}_eip_www_${var.pscloud_env}"
+    Name = "${var.pscloud_company}_eip_www_${var.pscloud_env}_${var.pscloud_project}"
   }
 }
 
