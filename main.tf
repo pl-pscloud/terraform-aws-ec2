@@ -5,10 +5,12 @@ resource "aws_instance" "pscloud-ec2" {
   key_name      = var.pscloud_key_name
   instance_type = var.pscloud_instance_type
 
-  subnet_id              = var.pscloud_subnet_id
-  vpc_security_group_ids = var.pscloud_sec_gr
+  subnet_id               = var.pscloud_subnet_id
+  vpc_security_group_ids  = var.pscloud_sec_gr
 
-  private_ip = var.pscloud_private_ip
+  private_ip              = var.pscloud_private_ip
+
+  iam_instance_profile    = var.pscloud_instance_profile
 
   root_block_device {
     volume_type           = var.pscloud_root_volume_type

@@ -9,6 +9,7 @@ variable "pscloud_subnet_id" {}
 variable "pscloud_sec_gr" {}
 variable "pscloud_eip_true" { default = false}
 variable "pscloud_private_ip" { default = "" }
+variable "pscloud_instance_profile" { default = "" }
 variable "pscloud_remote_exec_key" {}
 variable "pscloud_monitoring" { default = false}
 variable "pscloud_root_volume_type" { default = "gp2" }
