@@ -12,6 +12,8 @@ resource "aws_instance" "pscloud-ec2" {
 
   iam_instance_profile    = var.pscloud_instance_profile
 
+  ebs_optimized           = var.pscloud_ebs_optimized
+
   root_block_device {
     volume_type           = var.pscloud_root_volume_type
     volume_size           = var.pscloud_root_volume_size

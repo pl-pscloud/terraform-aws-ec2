@@ -16,6 +16,7 @@ variable "pscloud_root_volume_type" { default = "gp2" }
 variable "pscloud_root_volume_size" { default = 10 }
 variable "pscloud_root_volume_encrypted" { default = "false" }
 variable "pscloud_kms_key_id" { default = ""}
+variable "pscloud_ebs_optimized" { default = false }
 
 variable "pscloud_provisioner_ssh" { default = false}
 
