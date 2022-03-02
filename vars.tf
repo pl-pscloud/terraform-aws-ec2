@@ -19,6 +19,7 @@ variable "pscloud_kms_key_id" { default = ""}
 variable "pscloud_ebs_optimized" { default = false }
 
 variable "pscloud_provisioner_ssh" { default = false}
+variable "pscloud_ansible" { default = true}
 
 variable "pscloud_ebs_volumes" {
   type = list(object({

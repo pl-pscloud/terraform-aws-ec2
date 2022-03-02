@@ -73,6 +73,8 @@ resource "aws_eip" "pscloud-eip" {
 }
 
 data "template_file" "ec2tpl" {
+  count = (var.pscloud_ansible == true) ? 1 : 0
+
   template = file("../ansible/templates/inventory.tpl")
   vars = {
     ec2name = var.pscloud_project
@@ -81,6 +83,8 @@ data "template_file" "ec2tpl" {
 }
 
 resource "local_file" "ec2tpl_file" {
+  count = (var.pscloud_ansible == true) ? 1 : 0
+  
   content  = data.template_file.ec2tpl.rendered
   filename = "../ansible/inventory/ec2-host-${var.pscloud_env}-${var.pscloud_project}"
 
