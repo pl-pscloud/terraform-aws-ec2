@@ -85,7 +85,7 @@ data "template_file" "ec2tpl" {
 resource "local_file" "ec2tpl_file" {
   count = (var.pscloud_ansible == true) ? 1 : 0
   
-  content  = data.template_file.ec2tpl.rendered
+  content  = data.template_file.ec2tpl[0].rendered
   filename = "../ansible/inventory/ec2-host-${var.pscloud_env}-${var.pscloud_project}"
 
   depends_on = [
