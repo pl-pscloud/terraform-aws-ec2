@@ -75,7 +75,7 @@ resource "aws_eip" "pscloud-eip" {
 data "template_file" "ec2tpl" {
   count = (var.pscloud_ansible == true) ? 1 : 0
 
-  template = file("../ansible/templates/inventory.tpl")
+  template = file("${var.pscloud_ansible_path}ansible/templates/inventory.tpl")
   vars = {
     ec2name = var.pscloud_project
     ec2ip   = (var.pscloud_eip_true == true ? (join("\n", aws_eip.pscloud-eip.*.public_ip)) : (join("\n", aws_instance.pscloud-ec2.*.public_ip)))
@@ -86,7 +86,7 @@ resource "local_file" "ec2tpl_file" {
   count = (var.pscloud_ansible == true) ? 1 : 0
   
   content  = data.template_file.ec2tpl[0].rendered
-  filename = "../ansible/inventory/ec2-host-${var.pscloud_env}-${var.pscloud_project}"
+  filename = "${var.pscloud_ansible_path}ansible/inventory/ec2-host-${var.pscloud_env}-${var.pscloud_project}"
 
   depends_on = [
     aws_eip.pscloud-eip, aws_instance.pscloud-ec2,
